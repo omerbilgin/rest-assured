@@ -46,7 +46,12 @@
             <artifactId>mockserver-client-java</artifactId>
             <version>5.11.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.33</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
