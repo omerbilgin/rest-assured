@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -25,3 +25,6 @@ jobs:
           cache: maven
       - name: Step 3 - build with Maven
         run: mvn -B package --file pom.xml
+      - name: Step 4 - publish test report
+        if: ${{ always() }}
+        uses: scacap/action-surefire-report@v1
