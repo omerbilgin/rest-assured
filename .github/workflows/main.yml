@@ -15,9 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      issues: write
+      checks: write
+      contents: read
+      issues: read
       pull-requests: write
-      contents: write
 
     steps:
       - name: Step 1 - checkout master branch from github
