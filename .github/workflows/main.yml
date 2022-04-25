@@ -17,6 +17,7 @@ jobs:
     permissions:
       issues: write
       pull-requests: write
+      contents: write
 
     steps:
       - name: Step 1 - checkout master branch from github
