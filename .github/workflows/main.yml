@@ -14,6 +14,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      checks: write
+      contents: read
+      issues: read
+      pull-requests: write
+
     steps:
       - name: Step 1 - checkout master branch from github
         uses: actions/checkout@v2
