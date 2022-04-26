@@ -20,7 +20,7 @@ import org.testcontainers.utility.DockerImageName;
 
 public class RestAssuredWithMockServerTest {
   private static final DockerImageName DEFAULT_IMAGE_NAME =
-      DockerImageName.parse("mockserver/mockserver").withTag("mockserver-5.11.2");
+      DockerImageName.parse("mockserver/mockserver").withTag("mockserver-5.13.2");
   @Nullable private static MockServerClient mockServerClient = null;
 
   @Rule
