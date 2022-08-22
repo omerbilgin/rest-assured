@@ -19,8 +19,9 @@ import org.testcontainers.containers.MockServerContainer;
 import org.testcontainers.utility.DockerImageName;
 
 public class RestAssuredWithMockServerTest {
+  private static final String MOCK_SERVER_VERSION = MockServerClient.class.getPackage().getImplementationVersion();
   private static final DockerImageName DEFAULT_IMAGE_NAME =
-      DockerImageName.parse("mockserver/mockserver").withTag("mockserver-5.13.2");
+      DockerImageName.parse("mockserver/mockserver").withTag(String.format("mockserver-%s", MOCK_SERVER_VERSION));
   @Nullable private static MockServerClient mockServerClient = null;
 
   @Rule
@@ -32,9 +33,9 @@ public class RestAssuredWithMockServerTest {
     mockServerContainer.start();
     mockServerClient =
         new MockServerClient(
-            mockServerContainer.getContainerIpAddress(), mockServerContainer.getServerPort());
+            mockServerContainer.getHost(), mockServerContainer.getServerPort());
     RestAssured.baseURI =
-        mockServerContainer.getContainerIpAddress() + ":" + mockServerContainer.getServerPort();
+        mockServerContainer.getHost() + ":" + mockServerContainer.getServerPort();
     RestAssured.basePath = "/client";
   }
 
@@ -43,7 +44,7 @@ public class RestAssuredWithMockServerTest {
     setExpectation("{\"name\":\"Richard Thompson\"}");
     var requestSpecification =
         new RequestSpecBuilder()
-            .setBaseUri("http://" + mockServerContainer.getContainerIpAddress())
+            .setBaseUri("http://" + mockServerContainer.getHost())
             .setPort(mockServerContainer.getServerPort())
             .setBasePath("/client")
             .addQueryParam("id", "10001")
