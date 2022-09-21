@@ -1,12 +1,10 @@
 name: allure-report
 
 on:
-  release:
-    types:
-      - created
   push:
-    branches-ignore:
-      - '!master'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   allure:
