@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Sep 22 16:57:15 GMT 2022","Thu Sep 22 16:57:19 GMT 2022","3912","","com.bilgin.RestAssuredWithMockServerTest","","com.bilgin.RestAssuredWithMockServerTest","restAssuredWithMockServerTest","restAssuredWithMockServerTest()",""
-"passed","Thu Sep 22 16:57:19 GMT 2022","Thu Sep 22 16:57:20 GMT 2022","336","","com.bilgin.RestAssuredTest","","com.bilgin.RestAssuredTest","singleUserTest","singleUserTest()",""
