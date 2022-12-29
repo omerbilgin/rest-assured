@@ -45,7 +45,7 @@ public class RestAssuredTest {
     assertFalse(usersList.getData().isEmpty());
     assertThat(usersList.getData().size()).isGreaterThan(0);
     for (var userData : usersList.getData()) {
-      assertThat(userData.getEmail().contains("@reqres.in"));
+      assertThat(userData.getEmail().contains("@reqres.in")).isTrue();
       Allure.addAttachment("avatar", "image", userData.getAvatar().openStream(), ".jpg");
     }
   }
