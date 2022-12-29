@@ -19,9 +19,11 @@ import org.testcontainers.containers.MockServerContainer;
 import org.testcontainers.utility.DockerImageName;
 
 public class RestAssuredWithMockServerTest {
-  private static final String MOCK_SERVER_VERSION = MockServerClient.class.getPackage().getImplementationVersion();
+  private static final String MOCK_SERVER_VERSION =
+      MockServerClient.class.getPackage().getImplementationVersion();
   private static final DockerImageName DEFAULT_IMAGE_NAME =
-      DockerImageName.parse("mockserver/mockserver").withTag(String.format("mockserver-%s", MOCK_SERVER_VERSION));
+      DockerImageName.parse("mockserver/mockserver")
+          .withTag(String.format("mockserver-%s", MOCK_SERVER_VERSION));
   @Nullable private static MockServerClient mockServerClient = null;
 
   @Rule
@@ -32,10 +34,8 @@ public class RestAssuredWithMockServerTest {
   static void beforeTest() {
     mockServerContainer.start();
     mockServerClient =
-        new MockServerClient(
-            mockServerContainer.getHost(), mockServerContainer.getServerPort());
-    RestAssured.baseURI =
-        mockServerContainer.getHost() + ":" + mockServerContainer.getServerPort();
+        new MockServerClient(mockServerContainer.getHost(), mockServerContainer.getServerPort());
+    RestAssured.baseURI = mockServerContainer.getHost() + ":" + mockServerContainer.getServerPort();
     RestAssured.basePath = "/client";
   }
 

@@ -12,14 +12,13 @@ public class RestAssuredTest {
   @BeforeAll
   public static void initialize() {
     RestAssured.baseURI = "http://reqres.in";
-    RestAssured.basePath = "/api/users/2";
+    RestAssured.basePath = "/api";
   }
 
   @Test
   public void singleUserTest() {
-    var httpRequest = given();
-    var response = httpRequest.get();
-    var body = response.getBody().asString();
-    assertTrue(body.contains("janet.weaver@reqres.in"), "String not found");
+    assertTrue(
+        given().get("users/2").getBody().asString().contains("janet.weaver@reqres.in"),
+        "String not found");
   }
 }
