@@ -5,6 +5,9 @@ import static org.hamcrest.Matchers.containsString;
 import static org.mockserver.model.HttpRequest.request;
 
 import io.netty.handler.codec.http.HttpMethod;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import java.util.Objects;
@@ -40,6 +43,9 @@ public class RestAssuredWithMockServerTest {
   }
 
   @Test
+  @Description("Assertion for single user response from mock test api")
+  @Feature("RestAssured")
+  @Owner("Bilgin")
   public void restAssuredWithMockServerTest() {
     setExpectation("{\"name\":\"Richard Thompson\"}");
     var requestSpecification =
