@@ -47,6 +47,58 @@ public class RestAssuredTest {
     usersList.getData().forEach(userData -> assertUserData(userData));
   }
 
+  @Test
+  @Description("Assertion for creating a new user")
+  @Feature("RestAssured")
+  @Owner("Bilgin")
+  public void createUser() {
+    var requestParams = new JSONObject();
+    requestParams.put("name", "John Doe");
+    requestParams.put("job", "Software Engineer");
+
+    var response = given().contentType(ContentType.JSON).body(requestParams.toString())
+            .post("/users");
+
+    var statusCode = response.getStatusCode();
+    assertEquals(statusCode, 201);
+
+    var jsonResponse = new JSONObject(response.getBody().asString());
+
+    assertNotNull(jsonResponse);
+    assertTrue(jsonResponse.has("name"));
+    assertTrue(jsonResponse.has("job"));
+    assertTrue(jsonResponse.has("id"));
+    assertEquals(jsonResponse.getString("name"), "Jane Doe");
+    assertEquals(jsonResponse.getString("job"), "Software Engineer");
+  }
+
+  @Test
+  @Description("Assertion for updating an existing user")
+  @Feature("RestAssured")
+  @Owner("Bilgin")
+  public void updateUserTest() {
+      var requestParams = new JSONObject();
+      requestParams.put("name", "Jane Doe");
+      requestParams.put("job", "Product Manager");
+
+      var response = given().contentType(ContentType.JSON).body(requestParams.toString())
+              .put("/users/2");
+
+      var statusCode = response.getStatusCode();
+      assertEquals(statusCode, 200);
+
+      var responseBody = response.getBody().asString();
+      var jsonResponse = new JSONObject(responseBody);
+
+      assertNotNull(jsonResponse);
+      assertTrue(jsonResponse.has("name"));
+      assertTrue(jsonResponse.has("job"));
+      assertTrue(jsonResponse.has("updatedAt"));
+
+      assertEquals(jsonResponse.getString("name"), "Jane Doe");
+      assertEquals(jsonResponse.getString("job"), "Product Manager");
+  }
+
   @SneakyThrows
   private void assertUserData(ListUsers.UserData userData) {
     assertThat(userData.getEmail().contains("@reqres.in")).isTrue();
