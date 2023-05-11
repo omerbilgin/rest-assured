@@ -52,24 +52,19 @@ public class RestAssuredTest {
   @Feature("RestAssured")
   @Owner("Bilgin")
   public void createUser() {
-    var requestParams = new JSONObject();
-    requestParams.put("name", "John Doe");
-    requestParams.put("job", "Software Engineer");
+    var user = new User("John Doe", "Software Engineer", null, null, null);
 
-    var response = given().contentType(ContentType.JSON).body(requestParams.toString())
+    var response = given().contentType(ContentType.JSON).body(user)
             .post("/users");
 
-    var statusCode = response.getStatusCode();
+    int statusCode = response.getStatusCode();
     assertEquals(statusCode, 201);
 
-    var jsonResponse = new JSONObject(response.getBody().asString());
-
-    assertNotNull(jsonResponse);
-    assertTrue(jsonResponse.has("name"));
-    assertTrue(jsonResponse.has("job"));
-    assertTrue(jsonResponse.has("id"));
-    assertEquals(jsonResponse.getString("name"), "Jane Doe");
-    assertEquals(jsonResponse.getString("job"), "Software Engineer");
+    var createdUser = response.getBody().as(User.class);
+    assertNotNull(createdUser);
+    assertNotNull(createdUser.name());
+    assertNotNull(createdUser.job());
+    assertNotNull(createdUser.id());
   }
 
   @Test
@@ -77,26 +72,22 @@ public class RestAssuredTest {
   @Feature("RestAssured")
   @Owner("Bilgin")
   public void updateUserTest() {
-      var requestParams = new JSONObject();
-      requestParams.put("name", "Jane Doe");
-      requestParams.put("job", "Product Manager");
+      var user = new User("Jane Doe", "Product Manager", null, null, null);
 
-      var response = given().contentType(ContentType.JSON).body(requestParams.toString())
+      var response = given().contentType(ContentType.JSON).body(user)
               .put("/users/2");
 
       var statusCode = response.getStatusCode();
       assertEquals(statusCode, 200);
 
-      var responseBody = response.getBody().asString();
+      var responseBody = response.getBody();
       var jsonResponse = new JSONObject(responseBody);
 
-      assertNotNull(jsonResponse);
-      assertTrue(jsonResponse.has("name"));
-      assertTrue(jsonResponse.has("job"));
-      assertTrue(jsonResponse.has("updatedAt"));
-
-      assertEquals(jsonResponse.getString("name"), "Jane Doe");
-      assertEquals(jsonResponse.getString("job"), "Product Manager");
+    var updatedUser = response.getBody().as(User.class);
+    assertNotNull(updatedUser);
+    assertEquals(updatedUser.name(), "Jane Doe");
+    assertEquals(updatedUser.job(), "Product Manager");
+    assertNotNull(updatedUser.updatedAt());
   }
 
   @SneakyThrows
@@ -104,4 +95,6 @@ public class RestAssuredTest {
     assertThat(userData.getEmail().contains("@reqres.in")).isTrue();
     Allure.addAttachment("avatar", "image", userData.getAvatar().openStream(), ".jpg");
   }
+
+  public record User(String name, String job, String id, String createdAt, String updatedAt) {}
 }
