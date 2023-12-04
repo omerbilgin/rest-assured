@@ -1,4 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Mon Sep 04 22:11:14 GMT 2023","Mon Sep 04 22:11:17 GMT 2023","2857","","com.bilgin.RestAssuredTest","","com.bilgin.RestAssuredTest","userListTest","userListTest()","Assertion for user list response from real test api"
-"passed","Mon Sep 04 22:11:29 GMT 2023","Mon Sep 04 22:11:32 GMT 2023","2927","","com.bilgin.RestAssuredWithMockServerTest","","com.bilgin.RestAssuredWithMockServerTest","restAssuredWithMockServerTest","restAssuredWithMockServerTest()","Assertion for single user response from mock test api"
-"passed","Mon Sep 04 22:11:12 GMT 2023","Mon Sep 04 22:11:14 GMT 2023","1829","","com.bilgin.RestAssuredTest","","com.bilgin.RestAssuredTest","singleUserTest","singleUserTest()","Assertion for single user response from real test api"
