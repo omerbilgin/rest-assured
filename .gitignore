@@ -9,4 +9,3 @@ buildNumber.properties
 .mvn/timing.properties
 .idea/
 .vscode/
-allure-results
