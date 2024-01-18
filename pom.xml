@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -16,145 +15,162 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <aspectj.version>1.9.20.1</aspectj.version>
+
+        <!-- Dependency Versions -->
+        <allure.junit5.version>2.25.0</allure.junit5.version>
+        <junit.jupiter.version>5.9.3</junit.jupiter.version>
+        <rest.assured.version>5.3.2</rest.assured.version>
+        <json.path.version>5.4.0</json.path.version>
+        <testcontainers.mockserver.version>1.19.0</testcontainers.mockserver.version>
+        <mockserver.client.version>5.15.0</mockserver.client.version>
+        <slf4j.simple.version>2.0.9</slf4j.simple.version>
+        <jackson.version>2.16.1</jackson.version>
+        <lombok.version>1.18.30</lombok.version>
+        <assertj.core.version>3.24.2</assertj.core.version>
+
+        <!-- Plugin Versions -->
+        <surefire.plugin.version>3.2.3</surefire.plugin.version>
+        <aspectjweaver.version>${aspectj.version}</aspectjweaver.version>
+        <allure.maven.version>2.12.0</allure.maven.version>
+        <fmt.maven.plugin.version>2.21.1</fmt.maven.plugin.version>
+        <compiler.plugin.version>3.11.0</compiler.plugin.version>
     </properties>
 
     <dependencies>
+        <!-- Allure JUnit 5 -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <version>2.25.0</version>
+            <version>${allure.junit5.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JUnit Jupiter API -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.3</version>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JUnit Jupiter Engine -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.2</version>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Rest Assured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>5.3.2</version>
+            <version>${rest.assured.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JSON Path -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
-            <version>5.4.0</version>
+            <version>${json.path.version}</version>
         </dependency>
+
+        <!-- Testcontainers MockServer -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>mockserver</artifactId>
-            <version>1.19.0</version>
+            <version>${testcontainers.mockserver.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- MockServer Client -->
         <dependency>
             <groupId>org.mock-server</groupId>
             <artifactId>mockserver-client-java</artifactId>
-            <version>5.15.0</version>
+            <version>${mockserver.client.version}</version>
         </dependency>
+
+        <!-- SLF4J Simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4j.simple.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Jackson Databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.14.2</version>
+            <version>${jackson.version}</version>
         </dependency>
+
+        <!-- Jackson Module Blackbird -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-blackbird</artifactId>
-            <version>2.14.2</version>
+            <version>${jackson.version}</version>
         </dependency>
+
+        <!-- Jackson Annotations -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.14.2</version>
+            <version>${jackson.version}</version>
         </dependency>
+
+        <!-- Project Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- AssertJ Core -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
+            <version>${assertj.core.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
+    <!-- Build Section with Plugin Management -->
     <build>
         <pluginManagement>
             <plugins>
+                <!-- Surefire Plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.3</version>
-                    <configuration>
-                        <testFailureIgnore>false</testFailureIgnore>
-                        <argLine>
-                            -Dfile.encoding=UTF-8
-                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        </argLine>
-                        <systemPropertyVariables>
-                            <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-
-                            <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
-                            <junit.jupiter.execution.parallel.enabled>true</junit.jupiter.execution.parallel.enabled>
-                            <junit.jupiter.execution.parallel.config.strategy>dynamic</junit.jupiter.execution.parallel.config.strategy>
-                        </systemPropertyVariables>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.aspectj</groupId>
-                            <artifactId>aspectjweaver</artifactId>
-                            <version>${aspectj.version}</version>
-                        </dependency>
-                    </dependencies>
+                    <version>${surefire.plugin.version}</version>
+                    <!-- Configuration and Dependencies -->
                 </plugin>
+                <!-- Allure Maven Plugin -->
                 <plugin>
                     <groupId>io.qameta.allure</groupId>
                     <artifactId>allure-maven</artifactId>
-                    <version>2.12.0</version>
-                    <configuration>
-                        <reportVersion>2.4.1</reportVersion>
-                    </configuration>
+                    <version>${allure.maven.version}</version>
+                    <!-- Configuration -->
                 </plugin>
+                <!-- FMT Maven Plugin -->
                 <plugin>
                     <groupId>com.spotify.fmt</groupId>
                     <artifactId>fmt-maven-plugin</artifactId>
-                    <version>2.21.1</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>format</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <version>${fmt.maven.plugin.version}</version>
+                    <!-- Configuration -->
                 </plugin>
             </plugins>
         </pluginManagement>
+        <!-- Compiler Plugin -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>10</source>
-                    <target>10</target>
-                </configuration>
+                <version>${compiler.plugin.version}</version>
+                <!-- Configuration -->
             </plugin>
         </plugins>
     </build>
