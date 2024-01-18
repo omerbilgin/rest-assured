@@ -32,7 +32,7 @@
         <surefire.plugin.version>3.2.5</surefire.plugin.version>
         <aspectjweaver.version>${aspectj.version}</aspectjweaver.version>
         <allure.maven.version>2.12.0</allure.maven.version>
-        <fmt.maven.plugin.version>2.21.1</fmt.maven.plugin.version>
+        <fmt.maven.plugin.version>2.22</fmt.maven.plugin.version>
         <compiler.plugin.version>3.11.0</compiler.plugin.version>
     </properties>
 

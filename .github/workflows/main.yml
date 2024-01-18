@@ -54,7 +54,7 @@ jobs:
           keep_reports: 20
 
       - name: Deploy report to Github Pages
-        if: always()
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v2
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
