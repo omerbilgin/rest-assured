@@ -14,19 +14,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <aspectj.version>1.9.20.1</aspectj.version>
+        <aspectj.version>1.9.21</aspectj.version>
 
         <!-- Dependency Versions -->
         <allure.junit5.version>2.25.0</allure.junit5.version>
         <junit.jupiter.version>5.9.3</junit.jupiter.version>
-        <rest.assured.version>5.3.2</rest.assured.version>
+        <rest.assured.version>5.4.0</rest.assured.version>
         <json.path.version>5.4.0</json.path.version>
         <testcontainers.mockserver.version>1.19.0</testcontainers.mockserver.version>
         <mockserver.client.version>5.15.0</mockserver.client.version>
         <slf4j.simple.version>2.0.11</slf4j.simple.version>
         <jackson.version>2.16.1</jackson.version>
         <lombok.version>1.18.30</lombok.version>
-        <assertj.core.version>3.24.2</assertj.core.version>
+        <assertj.core.version>3.25.2</assertj.core.version>
 
         <!-- Plugin Versions -->
         <surefire.plugin.version>3.2.3</surefire.plugin.version>
